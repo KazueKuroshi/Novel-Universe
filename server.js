@@ -1,42 +1,31 @@
 const express = require('express');
 const cors = require('cors');
-const axios = require('axios');
-const cheerio = require('cheerio');
+const scrapeNovelData = require('./src/scraper');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Aktifkan CORS
 app.use(cors());
 
-// Endpoint untuk scraping novel data
+// Endpoint untuk scraping data dari beberapa URL
 app.get('/api/novel', async (req, res) => {
-    const url = req.query.url; // URL novel dari query parameter
-    if (!url) {
-        return res.status(400).json({ error: 'URL is required' });
+    const urls = req.query.url; // Array URL dari query parameter
+    if (!urls) {
+        return res.status(400).json({ error: 'URLs are required' });
     }
 
     try {
-        // Ambil HTML dari URL
-        const { data } = await axios.get(url);
-        const $ = cheerio.load(data);
+        const urlList = Array.isArray(urls) ? urls : [urls]; // Pastikan urls adalah array
+        const results = [];
 
-        // Contoh: Ambil judul novel
-        const title = $('h1.novel-title').text().trim();
+        for (const url of urlList) {
+            const novelData = await scrapeNovelData(url);
+            if (novelData) {
+                results.push(novelData);
+            }
+        }
 
-        // Contoh: Ambil deskripsi novel
-        const description = $('div.novel-description').text().trim();
-
-        // Contoh: Ambil daftar chapter
-        const chapters = [];
-        $('ul.chapter-list li').each((index, element) => {
-            const chapterTitle = $(element).find('a').text().trim();
-            const chapterUrl = $(element).find('a').attr('href');
-            chapters.push({ chapterTitle, chapterUrl });
-        });
-
-        // Kirim data sebagai response
-        res.json({ title, description, chapters });
+        res.json(results);
     } catch (error) {
         console.error('Error scraping data:', error);
         res.status(500).json({ error: 'Failed to scrape data' });
