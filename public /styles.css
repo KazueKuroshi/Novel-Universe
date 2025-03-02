@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+#novel-form {
+    margin-top: 10px;
+}
+
+#novel-url {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#novel-data {
+    padding: 20px;
+}
+
+.novel-info {
+    margin-bottom: 20px;
+}
+
+.chapter-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.chapter-list li {
+    margin: 10px 0;
+}
+
+.chapter-list a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.chapter-list a:hover {
+    text-decoration: underline;
+}
