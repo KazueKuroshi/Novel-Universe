@@ -11,5 +11,5 @@ A web app to scrape and display novel data from multiple sites.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/repositori-anda.git
-   cd repositori-anda
+   git clone https://github.com/KazueKuroshi/Novel-Universe.git
+   cd Novel-Universe
