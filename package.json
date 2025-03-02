@@ -1,7 +1,7 @@
 {
-  "name": "novel-universe",
+  "name": "novel-app",
   "version": "1.0.0",
-  "description": "Web app to scrape novel data",
+  "description": "Web app to scrape novel data from multiple sites",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
